@@ -1,6 +1,8 @@
 option('target-optspace', type: 'boolean', value: false,
        description: 'Compile with -Os')
 
+option('multilib', type: 'boolean', value: true,
+       description: 'Enable multilib compile')
 
 option('hw-fp', type: 'boolean', value: false,
 	description: 'Turn on hardware floating point math')
@@ -43,7 +45,7 @@ option('newlib-fvwrite-in-streamio', type: 'boolean', value: false,
        description: 'disable iov in streamio')
 option('newlib-fseek-optimization', type: 'boolean', value: false,
        description: 'disable fseek optimization')
-option('newlib_wide_orient', type: 'boolean', value: false,
+option('newlib-wide-orient', type: 'boolean', value: false,
        description: 'Turn off wide orientation in streamio')
 option('newlib-nano-malloc', type: 'boolean', value: false,
        description: 'use small-footprint nano-malloc implementation')
@@ -51,7 +53,7 @@ option('newlib-unbuf-stream-opt', type: 'boolean', value: false,
        description: 'enable unbuffered stream optimization in streamio')
 option('lite-exit', type: 'boolean', value: false,
        description: 'enable light weight exit')
-option('newlib_nano_formatted_io', type: 'boolean', value: false,
+option('newlib-nano-formatted-io', type: 'boolean', value: false,
        description: 'Use nano version formatted IO')
 option('newlib-retargetable-locking', type: 'boolean', value: false,
        description: 'Allow locking routines to be retargeted at link time')

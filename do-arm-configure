@@ -5,7 +5,6 @@ meson $DIR \
 	-Dtarget-optspace=true \
 	-Dnewlib-tinystdio=true \
 	-Dnewlib-supplied-syscalls=false \
-	-Dnewlib-reentrant-small=true\
 	-Dnewlib-wide-orient=false\
 	-Dnewlib-nano-malloc=true\
 	-Dlite-exit=true\

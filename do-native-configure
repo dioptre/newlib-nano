@@ -1,9 +1,9 @@
 #!/bin/sh
 DIR=`dirname $0`
 meson $DIR \
+	-Dmultilib=false \
 	-Dnewlib-tinystdio=true \
 	-Dnewlib-supplied-syscalls=false \
-	-Dnewlib-reentrant-small=true\
 	-Dnewlib-wide-orient=false\
 	-Dnewlib-nano-malloc=true\
 	-Dlite-exit=true\

@@ -8,29 +8,7 @@ project('newlib-nano', 'c',
 
 targets = []
 
-foreach target : run_command(meson.get_compiler('c'), '--print-multi-lib').stdout().strip().split('\n')
-  tmp = target.split(';')
-  flags = []
-  if tmp.length() > 1
-    foreach flag : tmp[1].strip('@').split('@')
-      if flag != ''
-	flags += '-' + flag
-      endif
-    endforeach
-    if tmp[0] == '.'
-      name = ''
-    else
-      name = '_' + tmp[0].underscorify()
-    endif
-  else
-    name = ''
-  endif
-  targets += name
-  value = [tmp[0], flags]
-  set_variable('target_' + name, value)
-  message(name)
-endforeach
-
+enable_multilib = get_option('multilib')
 enable_tests = get_option('tests')
 newlib_tinystdio = get_option('newlib-tinystdio')
 
@@ -50,11 +28,11 @@ newlib_reent_small = get_option('newlib-reent-small')
 newlib_global_stdio_streams = get_option('newlib-global-stdio-streams')
 newlib_fvwrite_in_streamio = get_option('newlib-fvwrite-in-streamio')
 newlib_fseek_optimization = get_option('newlib-fseek-optimization')
-newlib_wide_orient = get_option('newlib_wide_orient')
+newlib_wide_orient = get_option('newlib-wide-orient')
 newlib_nano_malloc = get_option('newlib-nano-malloc')
 newlib_unbuf_stream_opt = get_option('newlib-unbuf-stream-opt')
 lite_exit = get_option('lite-exit')
-newlib_nano_formatted_io = get_option('newlib_nano_formatted_io')
+newlib_nano_formatted_io = get_option('newlib-nano-formatted-io')
 newlib_retargetable_locking = get_option('newlib-retargetable-locking')
 newlib_long_time_t = get_option('newlib-long-time_t')
 newlib_multithread = get_option('newlib-multithread')
@@ -62,6 +40,33 @@ newlib_iconv = get_option('newlib-iconv')
 newlib_io_float = get_option('newlib-io-float')
 newlib_supplied_syscalls = get_option('newlib-supplied-syscalls')
 hw_fp = get_option('hw-fp')
+
+if enable_multilib
+  foreach target : run_command(meson.get_compiler('c'), '--print-multi-lib').stdout().strip().split('\n')
+    tmp = target.split(';')
+    flags = []
+    if tmp.length() > 1
+      foreach flag : tmp[1].strip('@').split('@')
+	if flag != ''
+	  flags += '-' + flag
+	endif
+      endforeach
+      if tmp[0] == '.'
+	name = ''
+      else
+	name = tmp[0].underscorify()
+      endif
+    else
+      name = ''
+    endif
+    targets += name
+    value = [tmp[0], flags]
+    set_variable('target_' + name, value)
+  endforeach
+else
+  targets = ['']
+  target_ = ['.', []]
+endif
 
 conf_data = configuration_data()
 
