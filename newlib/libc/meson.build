@@ -24,8 +24,6 @@ foreach target : targets
 
   instdir = join_paths(get_option('libdir'), value[0])
 
-  message(instdir)
-
   if target == ''
     libc_name = 'c'
   else
