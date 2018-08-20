@@ -12,4 +12,4 @@ packaging which builds for arm-none-eabi targets.
 
 ## For Arm target on debian & ubuntu host
 * ```apt install gcc-arm-none-eabi meson autoconf2.64``` and anything else
-* ```meson newlib --cross-file=newlib/cross-arm-none-eabi.txt && ninja```
+* ```./newlib/do-arm-configure && ninja``` Not ```meson newlib --cross-file=newlib/cross-arm-none-eabi.txt && ninja```
